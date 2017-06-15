@@ -1,0 +1,104 @@
+/* Header */
+
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include "libft/libft.h"
+# include <stdio.h>
+# include <inttypes.h>
+# include <limits.h>
+# include <wchar.h>
+# include <stdarg.h>
+# define CHECK_FLAGS(x) x == '+' || x == '-' || x == '0' || x == '#' || x == ' '
+# define LENGTH_FMT(x) x == 'h' || x == 'l' || x == 'z' || x == 'j'
+# define CHECK_SPEC(x) x == 'p' || x == 'S' || x == 's' || x == 'C' || x == 'c'
+
+typedef struct s_form
+{
+  char *flag;
+  int  width;
+  int precision;
+  char *length;
+  char spec;
+}              t_form;
+
+typedef struct s_val
+{
+  int r;
+  char *specifiers;
+  char *flags;
+  char *width;
+  char *precision;
+  char *length;
+  char **format;
+  void (*print_func)(const char*);
+  char *final_string;
+  t_form *fmt;
+  
+  /* array of function pointers? */
+}              t_val;
+
+int ft_printf(char *fmt, ...);
+void initialize_return_struct(t_val *ret);
+void decipher_flags(char *fmt, t_val *ret);
+void set_the_width(t_val *ret);
+char *ft_uitoa_base(unsigned int val, int base);
+char *ft_itoa_base(int value, int base);
+char *ft_longtoa_base(long long val,long long base);
+char *ft_us_longlong_toa_base(unsigned long long val, long long base);
+
+void ft_putstr_lower(const char *str);
+
+int smallfmt(char spec, va_list ap, t_val *ret);
+
+int count_digits(int val, int base);
+int count_digits_int(int val, int base);
+int count_uns_long_long(unsigned long long val, long long base);
+char *uns_long_edge_cases(unsigned long long n);
+
+char *left_justify(char *str, char *dst);
+char *right_justify(char *str, char *dst);
+char *make_string(char c, int len);
+
+int change_to_signed_char(int s);
+int change_to_unsigned_char(int s);
+int change_to_unsigned_short_int(int s);
+
+//void put_us_int(unsigned int n);
+void *ft_bspace(void *b, size_t size);
+void *ft_fill_with(void *b, char c, size_t size);
+void ft_be_any(void *s, char c, int n);
+
+//functions that read the va_arg and print the formatted result:
+void print_c(t_val *ret, va_list ap);
+void print_s(t_val *ret, va_list ap);
+char *format_ptr_addr(void *addr);
+
+void begin_ints(t_val *ret, va_list ap);
+void handle_short_int(t_val *ret, va_list ap, int base);
+void handle_long_int(t_val *ret, va_list ap, int base);
+void handle_intmax_t(t_val *ret, va_list ap, int base);
+void handle_size_t(t_val *ret, va_list ap, int base);
+void handle_normal_int(t_val *ret, va_list ap, int base);
+void handle_hh_ll(t_val *ret, va_list ap, int base);
+void handle_ll(t_val *ret, va_list ap, long long int h, int base);
+
+void begin_hex_values(t_val *ret, va_list ap);
+void handle_unsigned_short_hex(t_val *ret, va_list ap, int base);
+void handle_unsigned_long_hex(t_val *ret, va_list ap, int base);
+void handle_intmax_t_hex(t_val *ret, va_list ap, int base);
+void handle_size_t_hex(t_val *ret, va_list ap, int base);
+void handle_normal_int_hex(t_val *ret, va_list ap, int base);
+void handle_hh_ll_hex(t_val *ret, va_list ap, int base);
+void handle_ll_hex(t_val *ret, va_list ap, long long int h, int base);
+
+void begin_caps_hex_values(t_val *ret, va_list ap);
+
+void begin_unsigned_int_values(t_val *ret, va_list ap);
+
+void begin_unsigned_octal_values(t_val *ret, va_list ap);
+
+void begin_printing_pointer(t_val *ret, va_list ap);
+
+
+
+#endif

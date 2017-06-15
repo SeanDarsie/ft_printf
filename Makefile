@@ -6,7 +6,7 @@
 #    By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/15 00:18:52 by sdarsie           #+#    #+#              #
-#    Updated: 2017/06/15 13:41:02 by sdarsie          ###   ########.fr        #
+#    Updated: 2017/06/15 13:42:03 by sdarsie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJS = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 all: obj $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS) 
-	ar rc $(NAME) $(OBJS) libft/libft.a
+	ar rc $(NAME) $(OBJS) libft/*.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	gcc $(CFLAGS) -o $@ -c $<

@@ -133,11 +133,13 @@ BIN =	ft_striter.o \
 
 INCLUDES = libft.h
 
-all: $(NAME)
+all: $(NAME) $(BIN)
 
-$(NAME):
-	@gcc $(CFLAGS) -c $(FILES) $(INCLUDES)
-	@ar rc $(NAME) $(BIN)
+$(NAME): $(BIN)
+	ar rc $(NAME) $(BIN)
+
+$(BIN): $(FILES)
+	gcc $(CFLAGS) -c $(FILES) $(INCLUDES)
 
 clean:
 	@rm -f $(BIN) libft.h.gch

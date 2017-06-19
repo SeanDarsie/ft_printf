@@ -6,13 +6,8 @@ void print_s(t_val *ret, va_list ap)
   char *s;
 
   s = va_arg(ap, char*);
-  ret->precision = NULL;
-  if (ft_strchr(ret->fmt->flag, '-'))
-    ret->final_string = left_justify(s, ret->final_string);
-  else
-    ret->final_string = right_justify(s, ret->final_string);
-  ft_putstr(ret->final_string);
-  ret->r += ft_strlen(ret->final_string);
+  ret->mid_str = ft_strdup(s);
+  print_final_product(ret);
 }
 
 /* void prrint_wint_t(t_val *ret, va_list ap) */
@@ -33,10 +28,6 @@ void print_c(t_val *ret, va_list ap)
   /*     return; */
   /*   } */
   c = va_arg(ap, int);
-  if (ft_strchr(ret->fmt->flag, '-'))
-    ret->final_string[0] = c;
-  else
-    ret->final_string[ft_strlen(ret->final_string) - 1] = c;
-  ft_putstr(ret->final_string);
-  ret->r += ft_strlen(ret->final_string);
+  ret->mid_str = make_string(c, 1);
+  print_final_product(ret);
 }

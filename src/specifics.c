@@ -7,7 +7,7 @@ void initialize_return_struct(t_val *ret)
   //  ret = (t_val*)malloc(sizeof(t_val));
   ret->r = 0;
   ret->specifiers = (char*)malloc(20);
-  ret->specifiers = "sSpdDioOuUxXcC";
+  ret->specifiers = "sSpdDioOuUxXcC%";
   ret->flags = (char*)malloc(5);
   ret->flags = "#O-+ ";
   ret->length = (char*)malloc(20);
@@ -18,8 +18,10 @@ void initialize_return_struct(t_val *ret)
   ret->fmt->flag = (char*)malloc(20);
   ret->fmt->width = 0;
   ret->fmt->precision = 0;
-  /* ft_strnew(10); */
-  ret->print_func = &ft_putstr_lower;
+  printf("precision %zu\n", ret->fmt->precision);
+  ret->str_len = 0;
+  ret->mid_str = ft_strnew(10);
+  ret->print_func = ft_putstr;
 }
 
 void put_us_int(unsigned int n)
@@ -46,18 +48,6 @@ void *ft_bspace(void *b, size_t size)
   return (b);
 }
 
-/* void ft_fill_with(char *b, char c, size_t size) */
-/* { */
-/*   size_t i; */
-/*   char *s; */
-
-/*   i = -1; */
-/*   s = (char*)b; */
-/*   while (i < size) */
-/*     s[i++] = c; */
-/*   return (b); */
-/* } */
-
 char *make_string(char c, int len)
 {
   char *ret;
@@ -73,22 +63,20 @@ char *make_string(char c, int len)
   return (ret);
 }
 
-
-/* void	ft_be_any(void *s, char c,  int n) */
+/* void precision_with_spaces(t_val *ret) */
 /* { */
-/*   size_t size; */
-
-/*   size = (size_t)n; */
-/*   ft_memset(s, c, size); */
+  
 /* } */
 
-
-
-
-
-/* int main() */
+/* unsigned int conver_to_unsigned_int(int signed_num) */
 /* { */
-/*   unsigned int s = 4294967295; */
-/*   put_us_int(s); */
-/*   return (0); */
+/*   unsigned int ret_val; */
+
+/*   ret_val = (unsigned int)sugned_num; */
+/*   /\* if (signed_num < 0) *\/ */
+/*   /\*   ret = (unsigned int)signed_num += 4294967295; *\/ */
+/*   /\* while (signed_num > 4294967295) *\/ */
+/*   /\*   signed_num -= 4294967295; *\/ */
+/*   /\* ret_val = signed_num *\/ */
+/*   return (ret_val); */
 /* } */

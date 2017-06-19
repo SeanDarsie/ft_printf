@@ -11,18 +11,20 @@
 # define CHECK_FLAGS(x) x == '+' || x == '-' || x == '0' || x == '#' || x == ' '
 # define LENGTH_FMT(x) x == 'h' || x == 'l' || x == 'z' || x == 'j'
 # define CHECK_SPEC(x) x == 'p' || x == 'S' || x == 's' || x == 'C' || x == 'c'
+# define CHECK_CHAR(x) x != 'p' || x != 'S' || x != 's' || x != 'C' || x != 'c'
 
 typedef struct s_form
 {
   char *flag;
-  int  width;
-  int precision;
+  size_t  width;
+  size_t precision;
   char *length;
   char spec;
 }              t_form;
 
 typedef struct s_val
 {
+  size_t str_len;
   int r;
   char *specifiers;
   char *flags;
@@ -31,6 +33,7 @@ typedef struct s_val
   char *length;
   char **format;
   void (*print_func)(const char*);
+  char *mid_str;
   char *final_string;
   t_form *fmt;
   
@@ -79,6 +82,7 @@ void handle_long_int(t_val *ret, va_list ap, int base);
 void handle_intmax_t(t_val *ret, va_list ap, int base);
 void handle_size_t(t_val *ret, va_list ap, int base);
 void handle_normal_int(t_val *ret, va_list ap, int base);
+void handle_unsigned_normal_int(t_val *ret, va_list ap, int base);
 void handle_hh_ll(t_val *ret, va_list ap, int base);
 void handle_ll(t_val *ret, va_list ap, long long int h, int base);
 
@@ -99,6 +103,22 @@ void begin_unsigned_octal_values(t_val *ret, va_list ap);
 
 void begin_printing_pointer(t_val *ret, va_list ap);
 
+void handle_modulo(t_val *ret);
 
+void handle_hash(t_val *ret);
+void octal_hash(t_val *ret);
+void hex_hash(t_val *ret);
+
+void print_final_product(t_val *ret);
+
+void handle_undefinded_behavior(t_val *ret);
+
+void precision(t_val *ret);
+
+char *insert_str(char *str, char *dst, int beg, int len);
+
+int check_zero(t_val *ret);
+
+char *replace_beg(t_val *ret);
 
 #endif

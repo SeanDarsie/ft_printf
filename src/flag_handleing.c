@@ -10,6 +10,7 @@ void collect_precision(char *fmt, t_val *ret)
   k = 0;
   prec = (char*)malloc(10);
   ft_bzero(prec, 10);
+  printf("precision %zu\n", ret->fmt->precision);
   if (!ft_strchr(fmt, '.'))
     return;
   while(fmt[i] != '.')
@@ -23,7 +24,6 @@ void collect_precision(char *fmt, t_val *ret)
     }
   prec[k] = '\0';
   ret->fmt->precision = ft_atoi(prec);
-  //  printf("   %d\n", ret->fmt->precision);
 }
 
 void decipher_spec(char *fmt, t_val *ret)

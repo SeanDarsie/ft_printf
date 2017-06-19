@@ -41,8 +41,6 @@ char *left_justify(char *str, char *dst)
       i++;
     }
   ret_str[i] = '\0';
-  /* free(str); */
-  /* free(dst); */
   return (ret_str);
 }
 
@@ -69,7 +67,7 @@ char *right_justify(char *str, char *dst)
       i++;
     }
   ret_str[len] = '\0';
-  /* free(str); */
-  /* free(dst); */
   return (ret_str);
 }
+
+

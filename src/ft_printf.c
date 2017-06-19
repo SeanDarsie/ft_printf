@@ -15,7 +15,7 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     print_s(ret, ap);
   if (ret->fmt->spec == 'D' || ret->fmt->spec == 'd' || ret->fmt->spec == 'i')
     begin_ints(ret, ap);
-  if (ret->fmt->spec == 'c')
+  if (ret->fmt->spec == 'c' || ret->fmt->spec == 'C')
     print_c(ret, ap);
   if (ret->fmt->spec == 'x')
     begin_hex_values(ret, ap);
@@ -23,10 +23,13 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     begin_caps_hex_values(ret, ap);
   if (ret->fmt->spec == 'u')
     begin_unsigned_int_values(ret, ap);
-  if (ret->fmt->spec == 'o')
+  if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O')
     begin_unsigned_octal_values(ret, ap);
   if (ret->fmt->spec == 'p')
     begin_printing_pointer(ret, ap);
+  if (ret->fmt->spec == '%')
+    handle_modulo(ret);
+  //  print_final_product(ret);
 }
 
 char *find_next_specifiers(char *fmt, t_val *ret, int i)
@@ -45,6 +48,7 @@ char *find_next_specifiers(char *fmt, t_val *ret, int i)
 	  if (fmt[k] == ret->specifiers[g])
 	    {
 	      format = ft_strsub(fmt, i + 1, (k - i));
+	      /* printf("%s\n", format); */
 	      return (format);
 	    }
 	  g++;
@@ -75,22 +79,26 @@ void gather_specs(char *fmt, t_val *ret)
 void parse_fmt(char *fmt, va_list ap, t_val *ret)
 {
   int i;
-  int k;
+  size_t k;
 
   k = 0;
   i = 0;
   while(fmt[k])
     {
-      if (fmt[k] == '%' && ret->format[i][0] != '\0')
+      if (fmt[k] == '%' && ret->format[i] != NULL)
 	{
 	  dispatch_args(ret->format[i], ap, ret);
 	  k += ft_strlen(ret->format[i]);
 	  k++;
 	  i++;
 	}
-      if (fmt[k])
-	ft_putchar(fmt[k]);
-      k++;
+      if (fmt[k] && k < ft_strlen(fmt) && fmt[k] != '%')
+	{
+	  ft_putchar(fmt[k]);
+	  ret->r++;
+	}
+      if (fmt[k] != '%' && fmt[k])
+	k++;
     }
 }
 
@@ -106,8 +114,8 @@ int ft_printf(char *fmt, ...)
   va_start(ap, fmt);
   gather_specs(fmt, ret);
   parse_fmt(fmt, ap, ret);
-  free(ret->format);
-  free(ret);
+  //free(ret->format);
+  //free(ret);
   va_end(ap);
   return (ret->r);
  }

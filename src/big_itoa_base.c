@@ -43,7 +43,7 @@ char *edge_cases_big(long long n)
   if (n == LLONG_MIN)
     {
       num = (char*)malloc(21);
-      num = "-9223372036854775807";	
+      num = "-9223372036854775808";	
     }
   return (num);
 }

@@ -4,13 +4,11 @@
 
 void dispatch_args(char *format, va_list ap, t_val *ret)
 {
-  int index;
   int i;
 
   i = 0;
   decipher_flags(format, ret);
   set_the_width(ret);
-  index = 0;
   if (ret->fmt->spec == 's')
     print_s(ret, ap);
   if (ret->fmt->spec == 'D' || ret->fmt->spec == 'd' || ret->fmt->spec == 'i')
@@ -29,8 +27,7 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     begin_printing_pointer(ret, ap);
   if (ret->fmt->spec == '%')
     handle_modulo(ret);
-  //  print_final_product(ret);
-}
+ }
 
 char *find_next_specifiers(char *fmt, t_val *ret, int i)
 {

@@ -18,7 +18,6 @@ void initialize_return_struct(t_val *ret)
   ret->fmt->flag = (char*)malloc(20);
   ret->fmt->width = 0;
   ret->fmt->precision = 0;
-  printf("precision %zu\n", ret->fmt->precision);
   ret->str_len = 0;
   ret->mid_str = ft_strnew(10);
   ret->print_func = ft_putstr;

@@ -57,6 +57,7 @@ void attach_zero(t_val *ret)
 
 void print_final_product(t_val *ret)
 {
+  //printf("%s\n%s\n", ret->mid_str, ret->final_string);
   precision(ret);
   ret->str_len = ft_strlen(ret->mid_str);
   if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O' ||
@@ -68,7 +69,6 @@ void print_final_product(t_val *ret)
   else
     ret->final_string =
       right_justify(ret->mid_str, ret->final_string);
-  printf("check %d\n", check_zero(ret));
   if (check_zero(ret) == 1 && ft_strchr(ret->fmt->flag, '#'))
     ret->final_string = replace_beg(ret);
   ret->print_func(ret->final_string);

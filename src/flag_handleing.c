@@ -10,7 +10,6 @@ void collect_precision(char *fmt, t_val *ret)
   k = 0;
   prec = (char*)malloc(10);
   ft_bzero(prec, 10);
-  printf("precision %zu\n", ret->fmt->precision);
   if (!ft_strchr(fmt, '.'))
     return;
   while(fmt[i] != '.')
@@ -81,10 +80,8 @@ void decipher_width(char *fmt, t_val *ret)
   int k;
   char *number;
 
-  ret->fmt->precision = 1;
-  number = (char*)malloc(100);
-  ft_bzero(number, 20);
-  i = 0;
+  number = ft_strnew(12);
+  i = ft_strlen(ret->fmt->flag);
   k = 0;
   while (fmt[i])
     {

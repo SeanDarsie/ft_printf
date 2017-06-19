@@ -66,8 +66,9 @@ void precision(t_val *ret)
   int i;
   char *prec;
 
-  
   i = 0;
+  if (ret->fmt->precision == 0)
+    return;
   if (ret->fmt->spec == 's' || ret->fmt->spec == 'c' ||
       ret->fmt->spec == 'S' || ret->fmt->spec == 'C' ||
       ret->fmt->spec == 'p')

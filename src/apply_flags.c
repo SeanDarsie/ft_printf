@@ -36,6 +36,6 @@ void set_the_width(t_val *ret)
     ret->final_string = make_string('0', len);
   else
     ret->final_string = make_string(' ', len);
-  //handle_the_flags(ret);
+  //  printf("%zu\n%s\n", ret->fmt->width, ret->final_string);
 }
 

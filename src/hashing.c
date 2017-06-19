@@ -22,11 +22,6 @@ void octal_hash(t_val *ret)
 
 int check_zero(t_val *ret)
 {
-  printf("test1 %s\n", ret->fmt->flag);
-  printf("test2 %zu\n", ret->fmt->precision);
-  printf("test3 %c\n", ret->fmt->spec);
-
-  
   if (ft_strchr(ret->fmt->flag, '0') &&
       ret->fmt->precision == 0 &&
       /* ret->fmt->width > ret->str_len && */
@@ -65,6 +60,5 @@ char *replace_beg(t_val *ret)
       i++;
     }
   ret_str[i] = '\0';
-  printf("test:%s\n", ret_str);
   return (ret_str);
 }

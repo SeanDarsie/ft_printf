@@ -83,7 +83,8 @@ void handle_sign(t_val *ret)
       ret->mid_str =
 	insert_zeros(ret->mid_str, 1,
 		     (ret->fmt->precision) - ft_strlen(ret->mid_str) + 1);
-      free(tmp);
+      /* if (tmp != NULL) */
+      /* 	free(tmp); */
       return;
     }
   if (ret->fmt->precision > ft_strlen(ret->mid_str))

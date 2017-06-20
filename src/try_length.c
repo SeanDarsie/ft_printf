@@ -94,6 +94,11 @@ void handle_size_t(t_val *ret, va_list ap, int base)
 
 void begin_ints(t_val *ret, va_list ap)
 {
+  if (ret->fmt->spec == 'D')
+    {
+      handle_long_int(ret, ap, 10);
+      return;
+    }
   if (ft_strlen(ret->fmt->length) == 2)
     {
       handle_hh_ll(ret, ap, 10);

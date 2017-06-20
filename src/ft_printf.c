@@ -4,9 +4,6 @@
 
 void dispatch_args(char *format, va_list ap, t_val *ret)
 {
-  int i;
-
-  i = 0;
   decipher_flags(format, ret);
   set_the_width(ret);
   if (ret->fmt->spec == 's')
@@ -19,7 +16,7 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     begin_hex_values(ret, ap);
   if (ret->fmt->spec == 'X')
     begin_caps_hex_values(ret, ap);
-  if (ret->fmt->spec == 'u')
+  if (ret->fmt->spec == 'u' || ret->fmt->spec == 'U')
     begin_unsigned_int_values(ret, ap);
   if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O')
     begin_unsigned_octal_values(ret, ap);
@@ -27,6 +24,8 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     begin_printing_pointer(ret, ap);
   if (ret->fmt->spec == '%')
     handle_modulo(ret);
+  ret->flag = 0;
+  ret->prec_case = 0;
  }
 
 char *find_next_specifiers(char *fmt, t_val *ret, int i)

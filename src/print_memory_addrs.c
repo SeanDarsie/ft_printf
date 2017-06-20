@@ -39,21 +39,21 @@ char *insert_str(char *str, char *dst, int beg, int len)
   return (ret_str);
 }
 
-void attach_zero(t_val *ret)
-{
-  char *add;
+/* void attach_zero(t_val *ret) */
+/* { */
+/*   char *add; */
 
-  add = "0X";
-  if ((ret->fmt->spec == 'o' || ret->fmt->spec == 'O') &&
-      ft_strchr(ret->fmt->flag, '-') && ft_strlen(ret->final_string) <
-      ret->fmt->width)
-    ret->final_string = insert_str(ret->final_string, add, 0, 1);
-  else if ((ret->fmt->spec == 'x' || ret->fmt->spec == 'X') &&
-      ft_strchr(ret->fmt->flag, '-'))
-    ret->final_string = insert_str(ret->final_string, add, 0, 2);
-  /* else */
-  /*   handle_cases_with_zeros(ret); */
-}
+/*   add = "0X"; */
+/*   if ((ret->fmt->spec == 'o' || ret->fmt->spec == 'O') && */
+/*       ft_strchr(ret->fmt->flag, '-') && ft_strlen(ret->final_string) < */
+/*       ret->fmt->width) */
+/*     ret->final_string = insert_str(ret->final_string, add, 0, 1); */
+/*   else if ((ret->fmt->spec == 'x' || ret->fmt->spec == 'X') && */
+/*       ft_strchr(ret->fmt->flag, '-')) */
+/*     ret->final_string = insert_str(ret->final_string, add, 0, 2); */
+/*   /\* else *\/ */
+/*   /\*   handle_cases_with_zeros(ret); *\/ */
+/* } */
 
 void print_final_product(t_val *ret)
 {
@@ -71,6 +71,8 @@ void print_final_product(t_val *ret)
       right_justify(ret->mid_str, ret->final_string);
   if (check_zero(ret) == 1 && ft_strchr(ret->fmt->flag, '#'))
     ret->final_string = replace_beg(ret);
+  if (ret->flag && ret->prec_case)
+    ret->final_string = make_string(' ', ret->fmt->width);
   ret->print_func(ret->final_string);
   ret->r += ft_strlen(ret->final_string);
 }

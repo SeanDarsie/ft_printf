@@ -27,6 +27,8 @@ char *insert_zeros(char *str, int beg, int len)
 
   i = 0;
   k = 0;
+  if (len <= 0)
+    return (ft_strdup(str));
   ret_str = ft_strnew((ft_strlen(str) + len));
   while (i < beg)
     {
@@ -47,6 +49,7 @@ char *string_prec(t_val *ret)
   char *ret_str;
 
   i = 0;
+
   if (ret->fmt->spec == 'c' || ret->fmt->spec == 'C' ||
       ret->fmt->spec == 'p')
     return (ret->mid_str);
@@ -56,8 +59,8 @@ char *string_prec(t_val *ret)
       ret_str = ft_strsub(ret->mid_str, 0 , ret->fmt->precision);
       return (ret_str);
     }
-  else
-    return (ret->mid_str);
+  if (ret->mid_str[0] == '\0')
+      return (make_string(' ', 0));
   return (NULL);
 }
 
@@ -67,23 +70,23 @@ void precision(t_val *ret)
   char *prec;
 
   i = 0;
+  if (ret->mid_str[0] == '0' && ft_strlen(ret->mid_str) == 1)
+    ret->flag = 1;
+  if (CHECK_INT(ret->fmt->spec))
+    {
+      handle_sign(ret);
+      return;
+    }
   if (ret->fmt->precision == 0)
     return;
-  if (ret->fmt->spec == 's' || ret->fmt->spec == 'c' ||
-      ret->fmt->spec == 'S' || ret->fmt->spec == 'C' ||
-      ret->fmt->spec == 'p')
+   if (CHECK_SPEC(ret->fmt->spec))
     {
       ret->mid_str = string_prec(ret);
       return;
     }
   prec = make_string('0', ret->fmt->precision);
-  if (ft_strlen(ret->mid_str) > ft_strlen(prec))
-    {
-      free(prec);
-      return;
-    }
-  else
-    ret->mid_str = right_justify(ret->mid_str, prec);
+  ret->mid_str = right_justify(ret->mid_str, prec);
+  free(prec);
 }
   
   
@@ -91,28 +94,6 @@ void handle_hash(t_val *ret) //the hash flag is only relevant to the o x and X s
 {
   if (!ft_strchr(ret->fmt->flag, '#'))
     return;
-  /* if (!ft_strchr(ret->fmt->flag, '0')) */
-  /*   { */
-      octal_hash(ret);
-      hex_hash(ret);
-      return;
-    
-  
-  /* if ((ret->fmt->spec == 'o' || ret->fmt->spec == 'O') ) */
-  /*   { */
-  /*     if ((ret->str_len + 1) >= ret->fmt->width) */
-  /* 	ret->mid_str = ft_strjoin("0", ret->final_string); */
-  /*     return; */
-  /*   } */
-  /* if (ret->fmt->spec == 'x' || ret->fmt->spec == 'X') */
-  /*   { */
-  /*     if (ret->str_len == (ret->fmt->width + 1) && */
-  /* 	  ft_strchr(ret->fmt->flag, '0')) */
-  /* 	ret->mid_str = insert_str("X", ret->final_string, 1, 1); */
-  /*     else if (ret->str_len == (ret->fmt->width + 1) && */
-  /* 	       !ft_strchr(ret->fmt->flag, '0')) */
-  /* 	ret->mid_str = sub_zero(ret->final_string); */
-  /*     else if ((ret->str_len + 2) >= ret->fmt->width) */
-  /* 	ret->mid_str = ft_strjoin("0X", ret->final_string); */
-  /*   } */
+  octal_hash(ret);
+  hex_hash(ret);
 }

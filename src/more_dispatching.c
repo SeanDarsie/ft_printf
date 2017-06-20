@@ -49,7 +49,7 @@ void begin_unsigned_octal_values(t_val *ret, va_list ap)
       return;
     }   // h l j z are left
   if (ret->fmt->length[0] == '\0')
-    handle_unsigned_normal_int(ret, ap, 8); //unsigned base 10
+    handle_normal_int_hex(ret, ap, 8); //unsigned base 10
   if (ret->fmt->length[0] == 'z')
     handle_size_t_hex(ret, ap, 8); //unsigned can reuse the int version base 10
   if (ret->fmt->length[0] == 'l')

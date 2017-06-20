@@ -2,21 +2,25 @@
 
 void hex_hash(t_val *ret)
 {
+  /* printf("%s\n", ret->fmt->flag); */
   if (ret->fmt->spec != 'x' && ret->fmt->spec != 'X')
     return;
-  ret->mid_str = ft_strjoin("0X", ret->mid_str);
-
-  
+  if (ret->fmt->precision == 0 && ft_strchr(ret->fmt->flag, '0') &&
+      !ft_strchr(ret->fmt->flag, '-'))
+    return;
+  if (ret->flag == 0)
+    ret->mid_str = ft_strjoin("0X", ret->mid_str);
 }
 
 void octal_hash(t_val *ret)
 {
-  int i;
-
-  i = 0;
   if (ret->fmt->spec != 'o' && ret->fmt->spec != 'O')
     return;
-  if (ret->str_len < ret->fmt->width)
+  if (ret->fmt->precision == 0 && ft_strchr(ret->fmt->flag, '0') /* && */
+      /* !ft_strchr(ret->fmt->flag, '-') */)
+    return;
+  if (ret->str_len < ret->fmt->width &&
+      ret->flag == 0)
     ret->mid_str = ft_strjoin("0", ret->mid_str);
 }
 
@@ -61,4 +65,28 @@ char *replace_beg(t_val *ret)
     }
   ret_str[i] = '\0';
   return (ret_str);
+}
+
+void handle_sign(t_val *ret)
+{
+  char *tmp;
+
+  if (ft_strchr(ret->fmt->flag, '+') && !ft_strchr(ret->mid_str, '-'))
+    {
+      tmp = ret->mid_str;
+      ret->mid_str = ft_strjoin("+", ret->mid_str);
+      free(tmp);
+    }
+  if (ft_strchr(ret->mid_str, '-') || ft_strchr(ret->mid_str, '+'))
+    {
+      tmp = ret->mid_str;
+      ret->mid_str =
+	insert_zeros(ret->mid_str, 1,
+		     (ret->fmt->precision) - ft_strlen(ret->mid_str) + 1);
+      free(tmp);
+      return;
+    }
+  if (ret->fmt->precision > ft_strlen(ret->mid_str))
+    ret->mid_str = insert_zeros(ret->mid_str, 0,
+		     (ret->fmt->precision) - ft_strlen(ret->mid_str));
 }

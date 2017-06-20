@@ -53,6 +53,8 @@ char *right_justify(char *str, char *dst)
   i = 0;
   if (ft_strlen(str) >= ft_strlen(dst))
     return (str);
+  if (ft_strchr(str, '-') && dst[0] == '0')
+    return (insert_zeros(str, 1, (ft_strlen(dst) - ft_strlen(str))));
   ret_str = (char*)malloc(ft_strlen(dst));
   len = ft_strlen(dst) - ft_strlen(str);
   while (i < len)

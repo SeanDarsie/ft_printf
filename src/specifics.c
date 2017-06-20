@@ -4,7 +4,8 @@
 
 void initialize_return_struct(t_val *ret)
 {
-  //  ret = (t_val*)malloc(sizeof(t_val));
+  ret->flag = 0;
+  ret->prec_case = 0;
   ret->r = 0;
   ret->specifiers = (char*)malloc(20);
   ret->specifiers = "sSpdDioOuUxXcC%";
@@ -53,7 +54,9 @@ char *make_string(char c, int len)
   int  i;
 
   i = 0;
-  ret = ft_strnew(len); 
+  ret = ft_strnew(len);
+  if (len == 0)
+    return (ft_strdup(""));
   while (i < len)
     {
       ret[i] = c;

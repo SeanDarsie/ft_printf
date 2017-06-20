@@ -8,13 +8,14 @@ void collect_precision(char *fmt, t_val *ret)
 
   i = 0;
   k = 0;
-  prec = (char*)malloc(10);
-  ft_bzero(prec, 10);
+  prec = ft_strnew(30);
   if (!ft_strchr(fmt, '.'))
     return;
   while(fmt[i] != '.')
     i++;
   i++;
+  if (fmt[i] <= '0' || fmt[i] > '9')
+    ret->prec_case = 1;
   while (fmt[i] >= '0' && fmt[i] <= '9' && fmt[i])
     {
       prec[k] = fmt[i];
@@ -23,6 +24,7 @@ void collect_precision(char *fmt, t_val *ret)
     }
   prec[k] = '\0';
   ret->fmt->precision = ft_atoi(prec);
+  free(prec);
 }
 
 void decipher_spec(char *fmt, t_val *ret)
@@ -87,6 +89,8 @@ void decipher_width(char *fmt, t_val *ret)
     {
       if (fmt[i] >= '0' && fmt[i] <= '9')
 	{
+	  if (fmt[i - 1] == '.')
+	    break;
 	  while (fmt[i] >= '0' && fmt[i] <= '9' && fmt[i])
 	    {
 	      number[k] = fmt[i];

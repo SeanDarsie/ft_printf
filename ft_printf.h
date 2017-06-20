@@ -12,6 +12,7 @@
 # define LENGTH_FMT(x) x == 'h' || x == 'l' || x == 'z' || x == 'j'
 # define CHECK_SPEC(x) x == 'p' || x == 'S' || x == 's' || x == 'C' || x == 'c'
 # define CHECK_CHAR(x) x != 'p' || x != 'S' || x != 's' || x != 'C' || x != 'c'
+# define CHECK_INT(x) x == 'i' || x == 'd' || x == 'D'
 
 typedef struct s_form
 {
@@ -26,6 +27,8 @@ typedef struct s_val
 {
   size_t str_len;
   int r;
+  int flag;
+  int prec_case;
   char *specifiers;
   char *flags;
   char *width;
@@ -96,13 +99,9 @@ void handle_hh_ll_hex(t_val *ret, va_list ap, int base);
 void handle_ll_hex(t_val *ret, va_list ap, long long int h, int base);
 
 void begin_caps_hex_values(t_val *ret, va_list ap);
-
 void begin_unsigned_int_values(t_val *ret, va_list ap);
-
 void begin_unsigned_octal_values(t_val *ret, va_list ap);
-
 void begin_printing_pointer(t_val *ret, va_list ap);
-
 void handle_modulo(t_val *ret);
 
 void handle_hash(t_val *ret);
@@ -116,9 +115,11 @@ void handle_undefinded_behavior(t_val *ret);
 void precision(t_val *ret);
 
 char *insert_str(char *str, char *dst, int beg, int len);
+char *insert_zeros(char *str, int beg, int len);
 
 int check_zero(t_val *ret);
 
 char *replace_beg(t_val *ret);
 
+void handle_sign(t_val *ret);
 #endif

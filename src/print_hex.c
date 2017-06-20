@@ -62,8 +62,8 @@ void handle_normal_int_hex(t_val *ret, va_list ap, int base)
   to_print = va_arg(ap, int);
   real = (unsigned int)to_print;
   if (to_print < 0)
-    real =  to_print + 4294967295 + 1;
-  ret->mid_str = ft_us_longlong_toa_base(real, base); // send this to the printing function that deals with the conflicts between precision and width and #
+    real = to_print + 4294967295 + 1;
+  ret->mid_str = ft_us_longlong_toa_base(real, base); 
   print_final_product(ret);
   /* if (ft_strchr(ret->fmt->flag, '-')) */
   /*   ret->final_string = */

@@ -4,8 +4,9 @@ void hex_hash(t_val *ret)
 {
   if (ret->fmt->spec != 'x' && ret->fmt->spec != 'X')
     return;
-  if (!ft_strchr(ret->fmt->flag, '0'))
-    ret->mid_str = ft_strjoin("0X", ret->mid_str);
+  ret->mid_str = ft_strjoin("0X", ret->mid_str);
+
+  
 }
 
 void octal_hash(t_val *ret)
@@ -15,8 +16,7 @@ void octal_hash(t_val *ret)
   i = 0;
   if (ret->fmt->spec != 'o' && ret->fmt->spec != 'O')
     return;
-  if (ret->str_len < ret->fmt->width &&
-      !ft_strchr(ret->fmt->flag, '0'))
+  if (ret->str_len < ret->fmt->width)
     ret->mid_str = ft_strjoin("0", ret->mid_str);
 }
 

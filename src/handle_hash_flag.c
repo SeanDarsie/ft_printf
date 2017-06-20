@@ -91,12 +91,12 @@ void handle_hash(t_val *ret) //the hash flag is only relevant to the o x and X s
 {
   if (!ft_strchr(ret->fmt->flag, '#'))
     return;
-  if (!ft_strchr(ret->fmt->flag, '0'))
-    {
+  /* if (!ft_strchr(ret->fmt->flag, '0')) */
+  /*   { */
       octal_hash(ret);
       hex_hash(ret);
       return;
-    }
+    
   
   /* if ((ret->fmt->spec == 'o' || ret->fmt->spec == 'O') ) */
   /*   { */

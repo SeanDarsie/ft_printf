@@ -114,8 +114,3 @@ char	*ft_itoa_base(int value, int base)
         number_set(num, value, base, len);
 	return (num);
 }
-
-/* int main() */
-/* { */
-/*   printf("%s\n", ft_itoa_base(25, 16)); */
-/* } */

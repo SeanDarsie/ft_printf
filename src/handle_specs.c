@@ -47,6 +47,8 @@ void print_c(t_val *ret, va_list ap)
     ret->r++;
   if (c == '\0' && ret->fmt->width > 1 && !ft_strchr(ret->fmt->flag, '0'))
     ret->final_string = make_string(' ', (ret->fmt->width - 1));
+  if (c == '\0' && ret->fmt->width > 1 && ft_strchr(ret->fmt->flag, '0'))
+    ret->final_string = make_string('0', (ret->fmt->width - 1));
   ret->mid_str = make_string(c, 1);
   print_final_product(ret);
 }

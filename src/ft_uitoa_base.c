@@ -36,16 +36,12 @@ int count_uns_long_long(unsigned long long val, long long base)
 char *uns_long_edge_cases(unsigned long long n)
 {
   char *num;
-  
+
+  num = NULL;
    if (n == 0)
     {
       num = ft_strnew(2);
       num[0] = '0';
-    }
-  if (n == ULLONG_MAX)
-    {
-      num = ft_strnew(22);
-      num = "18446744073709551615";
     }
   return (num);
 }

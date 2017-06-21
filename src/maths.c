@@ -60,6 +60,8 @@ int change_to_signed_char(int s)
 
 int change_to_unsigned_char(int s)
 {
+  while (s < 0)
+    s+= 256;
   while (s > 255)
     {
 	s -= 256;

@@ -64,21 +64,3 @@ char *make_string(char c, int len)
     }
   return (ret);
 }
-
-/* void precision_with_spaces(t_val *ret) */
-/* { */
-  
-/* } */
-
-/* unsigned int conver_to_unsigned_int(int signed_num) */
-/* { */
-/*   unsigned int ret_val; */
-
-/*   ret_val = (unsigned int)sugned_num; */
-/*   /\* if (signed_num < 0) *\/ */
-/*   /\*   ret = (unsigned int)signed_num += 4294967295; *\/ */
-/*   /\* while (signed_num > 4294967295) *\/ */
-/*   /\*   signed_num -= 4294967295; *\/ */
-/*   /\* ret_val = signed_num *\/ */
-/*   return (ret_val); */
-/* } */

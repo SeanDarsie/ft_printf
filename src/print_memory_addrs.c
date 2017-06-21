@@ -42,8 +42,9 @@ char *insert_str(char *str, char *dst, int beg, int len)
 void print_final_product(t_val *ret)
 {
   //  printf("(-->%s<--)\n", ret->fmt->flag);
-  precision(ret);
   ret->str_len = ft_strlen(ret->mid_str);
+  precision(ret);
+  // ret->str_len = ft_strlen(ret->mid_str);
   handle_hash(ret);
   if (ft_strchr(ret->fmt->flag, '-'))
     ret->final_string =

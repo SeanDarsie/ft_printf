@@ -42,7 +42,7 @@ char *edge_cases_big(long long n)
     }
   if (n == LLONG_MIN)
     {
-      num = (char*)malloc(21);
+      num = (char*)malloc(22);
       num = "-9223372036854775808";	
     }
   return (num);
@@ -80,7 +80,7 @@ char *ft_us_longlong_toa_base(unsigned long long val, long long base)
   char *digits;
   int len;
 
-  if (val == 0 || val == ULLONG_MAX)
+  if (val == 0)
     return (uns_long_edge_cases(val));
   digits =  "0123456789ABCDEF";
   len = count_uns_long_long(val, base);

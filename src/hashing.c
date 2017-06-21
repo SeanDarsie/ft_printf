@@ -23,8 +23,7 @@ void octal_hash(t_val *ret)
     }
   if (ret->fmt->precision == 0 && ft_strchr(ret->fmt->flag, '0'))
     return;
-  if (ret->str_len < ret->fmt->width &&
-      ret->flag == 0)
+  if (ret->fmt->precision < (ret->str_len + 1))
     ret->mid_str = ft_strjoin("0", ret->mid_str);
 }
 

@@ -74,7 +74,6 @@ void handle_sign(t_val *ret)
 {
   char *tmp;
 
-   printf("(-->%s<--)\n", ret->final_string);
   if (ft_strchr(ret->fmt->flag, '+') && !ft_strchr(ret->mid_str, '-'))
     {
       tmp = ret->mid_str;

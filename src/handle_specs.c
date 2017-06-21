@@ -45,6 +45,11 @@ void print_c(t_val *ret, va_list ap)
   /*     print_wint_t(ret, ap);//print a w_int */
   /*     return; */
   /*   } */
+  if (ret->fmt->length[0] == 'l')
+    {
+      print_wint_t(ret, ap);
+      return;
+    }
   c = va_arg(ap, int);
   ret->print_func = ft_putstr;
   if (c == '\0' && ret->fmt->width < 1)

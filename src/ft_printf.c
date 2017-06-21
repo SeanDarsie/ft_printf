@@ -44,7 +44,7 @@ char *find_next_specifiers(char *fmt, t_val *ret, int i)
 	  if (fmt[k] == ret->specifiers[g])
 	    {
 	      format = ft_strsub(fmt, i + 1, (k - i));
-	      /* printf("%s\n", format); */
+	      //	      printf("%s\n", format);
 	      return (format);
 	    }
 	  g++;
@@ -66,6 +66,7 @@ void gather_specs(char *fmt, t_val *ret)
       if (fmt[index] == '%')
 	{
 	  ret->format[count] = find_next_specifiers(fmt, ret, index);
+	  index += ft_strlen(ret->format[count]);
 	  count++;
 	}
       index++;
@@ -110,8 +111,8 @@ int ft_printf(char *fmt, ...)
   va_start(ap, fmt);
   gather_specs(fmt, ret);
   parse_fmt(fmt, ap, ret);
-  //free(ret->format);
-  //free(ret);
+  free(ret->format);
+  free(ret);
   va_end(ap);
   return (ret->r);
  }

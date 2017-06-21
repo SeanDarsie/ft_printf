@@ -30,7 +30,7 @@ void begin_unsigned_int_values(t_val *ret, va_list ap)
       return;
     }   // h l j z are left
   if (ret->fmt->length[0] == '\0')
-    handle_normal_int_hex(ret, ap, 10); //unsigned base 10
+    handle_hh_ll_hex(ret, ap, 10); //unsigned base 10
   if (ret->fmt->length[0] == 'z')
     handle_size_t_hex(ret, ap, 10); //unsigned can reuse the int version base 10
   if (ret->fmt->length[0] == 'l')
@@ -50,7 +50,7 @@ void begin_unsigned_octal_values(t_val *ret, va_list ap)
       return;
     } 
   if (ret->fmt->length[0] == '\0')
-    handle_normal_int_hex(ret, ap, 8); //unsigned base 10
+    handle_hh_ll_hex(ret, ap, 8); //unsigned base 10
   if (ret->fmt->length[0] == 'z')
     handle_size_t_hex(ret, ap, 8); //unsigned can reuse the int version base 10
   if (ret->fmt->length[0] == 'l')
@@ -67,7 +67,10 @@ void begin_printing_pointer(t_val *ret, va_list ap)
 
   ret->print_func = ft_putstr_lower;
   pointer = va_arg(ap, void*);
-  ret->mid_str = format_ptr_addr(pointer);
+  if (pointer == 0x0)
+    ret->mid_str = ft_strdup("0x");
+  else
+    ret->mid_str = format_ptr_addr(pointer);
   print_final_product(ret);
 }
 

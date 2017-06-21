@@ -53,18 +53,10 @@ void handle_normal_int_hex(t_val *ret, va_list ap, int base)
   to_print = 0;
   to_print = va_arg(ap, int);
   real = (unsigned int)to_print;
-  if (to_print < 0)
-    real = to_print + 4294967295 + 1;
+  /* if (real < 0) */
+  /*   real = to_print + 4294967295 + 1; */
   ret->mid_str = ft_us_longlong_toa_base(real, base); 
   print_final_product(ret);
-  /* if (ft_strchr(ret->fmt->flag, '-')) */
-  /*   ret->final_string = */
-  /*     left_justify(ft_us_longlong_toa_base(real, base), ret->final_string); */
-  /* else */
-  /*   ret->final_string = */
-  /*     right_justify(ft_us_longlong_toa_base(real, base), ret->final_string); */
-  /* ret->print_func(ret->final_string); */
-  /* ret->r += ft_strlen(ret->final_string); */
 }
 
 void handle_size_t_hex(t_val *ret, va_list ap, int base)

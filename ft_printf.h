@@ -13,6 +13,7 @@
 # define CHECK_SPEC(x) x == 'p' || x == 'S' || x == 's' || x == 'C' || x == 'c'
 # define CHECK_CHAR(x) x != 'p' || x != 'S' || x != 's' || x != 'C' || x != 'c'
 # define CHECK_INT(x) x == 'i' || x == 'd' || x == 'D'
+# define CHECK_SIGN(x) x != 'i' && x != 'd' && x != 'D'
 
 typedef struct s_form
 {
@@ -116,10 +117,8 @@ void precision(t_val *ret);
 
 char *insert_str(char *str, char *dst, int beg, int len);
 char *insert_zeros(char *str, int beg, int len);
-
-int check_zero(t_val *ret);
-
 char *replace_beg(t_val *ret);
 
+int check_zero(t_val *ret);
 void handle_sign(t_val *ret);
 #endif

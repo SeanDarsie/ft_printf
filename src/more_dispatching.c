@@ -67,7 +67,7 @@ void begin_printing_pointer(t_val *ret, va_list ap)
 
   ret->print_func = ft_putstr_lower;
   pointer = va_arg(ap, void*);
-  if (pointer == 0x0)
+  if (pointer == 0x0 && ret->prec_case == 1)
     ret->mid_str = ft_strdup("0x");
   else
     ret->mid_str = format_ptr_addr(pointer);

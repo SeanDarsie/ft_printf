@@ -11,7 +11,6 @@ void print_s(t_val *ret, va_list ap)
     {
       tmp = ret->mid_str;
       ret->mid_str = ft_strdup("(null)");
-      // printf("%s\n", ret->mid_str);
       free(tmp);
       ret->r -= 5;
       print_final_product(ret);
@@ -23,12 +22,18 @@ void print_s(t_val *ret, va_list ap)
   print_final_product(ret);
 }
 
-/* void prrint_wint_t(t_val *ret, va_list ap) */
-/* { */
-/*   wint_t to_print; */
+void print_wint_t(t_val *ret, va_list ap)
+{
+  /* int i; */
+  int to_print;
 
-/*   to_print = va_arg */
-/* } */
+  /* i = 0; */
+  to_print = va_arg(ap, int);
+  /* while (to_print[i] && i < 4) */
+  /*   ret->mid_str[i] = to_print[i]; */
+  ret->mid_str[0] = to_print;
+  print_final_product(ret);
+}
 
 
 void print_c(t_val *ret, va_list ap)
@@ -41,6 +46,7 @@ void print_c(t_val *ret, va_list ap)
   /*     return; */
   /*   } */
   c = va_arg(ap, int);
+  ret->print_func = ft_putstr;
   if (c == '\0' && ret->fmt->width < 1)
     ret->r += 1;
   if (c == '\0' && ret->fmt->width == 2)

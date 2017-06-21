@@ -24,8 +24,7 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
     begin_printing_pointer(ret, ap);
   if (ret->fmt->spec == '%')
     handle_modulo(ret);
-  ret->flag = 0;
-  ret->prec_case = 0;
+  reset_flags(ret);
  }
 
 char *find_next_specifiers(char *fmt, t_val *ret, int i)

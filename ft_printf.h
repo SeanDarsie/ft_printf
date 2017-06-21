@@ -121,4 +121,5 @@ char *replace_beg(t_val *ret);
 
 int check_zero(t_val *ret);
 void handle_sign(t_val *ret);
+void reset_flags(t_val *ret);
 #endif

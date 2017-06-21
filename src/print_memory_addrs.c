@@ -14,6 +14,16 @@ char	*format_ptr_addr(void *addr)
   return (recv);
 }
 
+void reset_flags(t_val *ret)
+{
+  //ret->fmt->flag = NULL;
+  ret->fmt->width = 0;
+  ret->fmt->precision = 0;
+  ret->flag = 0;
+  ret->prec_case = 0;
+}
+
+
 char *insert_str(char *str, char *dst, int beg, int len)
 {
   int i;

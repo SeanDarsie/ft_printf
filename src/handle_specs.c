@@ -7,7 +7,16 @@ void print_s(t_val *ret, va_list ap)
   char *tmp;
 
   s = va_arg(ap, char*);
-  
+  if (!s)
+    {
+      tmp = ret->mid_str;
+      ret->mid_str = ft_strdup("(null)");
+      // printf("%s\n", ret->mid_str);
+      free(tmp);
+      ret->r -= 5;
+      print_final_product(ret);
+      return;
+    }
   tmp = ret->mid_str;
   ret->mid_str = ft_strdup(s);
   free(tmp);
@@ -33,9 +42,11 @@ void print_c(t_val *ret, va_list ap)
   /*   } */
   c = va_arg(ap, int);
   if (c == '\0' && ret->fmt->width < 1)
+    ret->r += 1;
+  if (c == '\0' && ret->fmt->width == 2)
     ret->r++;
-  if (c == '\0' &&ret->fmt->width > 1)
-    ret->fmt->width -= 1;
+  if (c == '\0' && ret->fmt->width > 1 && !ft_strchr(ret->fmt->flag, '0'))
+    ret->final_string = make_string(' ', (ret->fmt->width - 1));
   ret->mid_str = make_string(c, 1);
   print_final_product(ret);
 }

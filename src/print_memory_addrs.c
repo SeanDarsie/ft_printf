@@ -39,33 +39,18 @@ char *insert_str(char *str, char *dst, int beg, int len)
   return (ret_str);
 }
 
-/* void attach_zero(t_val *ret) */
-/* { */
-/*   char *add; */
-
-/*   add = "0X"; */
-/*   if ((ret->fmt->spec == 'o' || ret->fmt->spec == 'O') && */
-/*       ft_strchr(ret->fmt->flag, '-') && ft_strlen(ret->final_string) < */
-/*       ret->fmt->width) */
-/*     ret->final_string = insert_str(ret->final_string, add, 0, 1); */
-/*   else if ((ret->fmt->spec == 'x' || ret->fmt->spec == 'X') && */
-/*       ft_strchr(ret->fmt->flag, '-')) */
-/*     ret->final_string = insert_str(ret->final_string, add, 0, 2); */
-/*   /\* else *\/ */
-/*   /\*   handle_cases_with_zeros(ret); *\/ */
-/* } */
-
 void print_final_product(t_val *ret)
 {
-  //printf("%s\n%s\n", ret->mid_str, ret->final_string);
+  //  printf("(-->%s<--)\n", ret->fmt->flag);
   precision(ret);
   ret->str_len = ft_strlen(ret->mid_str);
-  if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O' ||
-      ret->fmt->spec == 'x' || ret->fmt->spec == 'X')
-    handle_hash(ret);
+  handle_hash(ret);
   if (ft_strchr(ret->fmt->flag, '-'))
     ret->final_string =
       left_justify(ret->mid_str, ret->final_string);
+  else if (ft_strchr(ret->fmt->flag, '0') && ft_strchr(ret->mid_str, '+'))
+    ret->final_string = insert_zeros(ret->mid_str, 1,
+  				     ret->fmt->width - ft_strlen(ret->mid_str));
   else
     ret->final_string =
       right_justify(ret->mid_str, ret->final_string);

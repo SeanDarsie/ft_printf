@@ -92,6 +92,14 @@ void precision(t_val *ret)
   
 void handle_hash(t_val *ret) //the hash flag is only relevant to the o x and X specifiers so let's assume we already checked for them
 {
+  if ((CHECK_INT(ret->fmt->spec)) &&
+      ft_strchr(ret->fmt->flag, ' ') &&
+      !ft_strchr(ret->fmt->flag, '+') &&
+      !ft_strchr(ret->mid_str, '-'))
+    ret->mid_str = ft_strjoin(" ", ret->mid_str);
+  if (ret->fmt->spec != 'o' && ret->fmt->spec != 'O' &&
+      ret->fmt->spec != 'x' && ret->fmt->spec != 'X')
+    return;
   if (!ft_strchr(ret->fmt->flag, '#'))
     return;
   octal_hash(ret);

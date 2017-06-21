@@ -16,8 +16,12 @@ void octal_hash(t_val *ret)
 {
   if (ret->fmt->spec != 'o' && ret->fmt->spec != 'O')
     return;
-  if (ret->fmt->precision == 0 && ft_strchr(ret->fmt->flag, '0') /* && */
-      /* !ft_strchr(ret->fmt->flag, '-') */)
+  if (ret->mid_str[0] == '0' && ft_strlen(ret->mid_str) == 1)
+    {
+      ret->flag = 0;
+      return;
+    }
+  if (ret->fmt->precision == 0 && ft_strchr(ret->fmt->flag, '0'))
     return;
   if (ret->str_len < ret->fmt->width &&
       ret->flag == 0)
@@ -83,8 +87,6 @@ void handle_sign(t_val *ret)
       ret->mid_str =
 	insert_zeros(ret->mid_str, 1,
 		     (ret->fmt->precision) - ft_strlen(ret->mid_str) + 1);
-      /* if (tmp != NULL) */
-      /* 	free(tmp); */
       return;
     }
   if (ret->fmt->precision > ft_strlen(ret->mid_str))

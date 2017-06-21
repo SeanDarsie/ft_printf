@@ -90,7 +90,7 @@ void precision(t_val *ret)
 }
   
   
-void handle_hash(t_val *ret) //the hash flag is only relevant to the o x and X specifiers so let's assume we already checked for them
+void handle_hash(t_val *ret)
 {
   if ((CHECK_INT(ret->fmt->spec)) &&
       ft_strchr(ret->fmt->flag, ' ') &&

@@ -21,8 +21,24 @@ void reset_flags(t_val *ret)
   ret->fmt->precision = 0;
   ret->flag = 0;
   ret->prec_case = 0;
+  ret->no_spec = 1;
+  ret->fmt->spec = '\0';
 }
 
+int check_no_spec(char *fmt, t_val *ret)
+{
+  int g;
+
+  g = 0;
+  while (fmt[g] && fmt[g] != '\%')
+    {
+      if (SPEC(fmt[g++]))
+	ret->no_spec = 0;
+    }
+  if (ret->no_spec == 1)
+    return (1);
+  return (0);
+}
 
 char *insert_str(char *str, char *dst, int beg, int len)
 {

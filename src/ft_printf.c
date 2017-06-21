@@ -4,6 +4,8 @@
 
 void dispatch_args(char *format, va_list ap, t_val *ret)
 {
+  if (check_no_spec(format, ret) == 0)
+    ret->mid_str = ft_strdup(format);
   decipher_flags(format, ret);
   set_the_width(ret);
   if (ret->fmt->spec == 's')
@@ -33,24 +35,23 @@ char *find_next_specifiers(char *fmt, t_val *ret, int i)
   int g;
   char *format;
 
+  ret->flag = 0;
   g = 0;
   k = i + 1;
   while (fmt[k])
     {
-      g = 0;
-      while (ret->specifiers[g])
+      //      printf("%s\n", fmt);
+      if (SPEC(fmt[k]) || fmt[k] == '\0')
 	{
-	  if (fmt[k] == ret->specifiers[g])
-	    {
-	      format = ft_strsub(fmt, i + 1, (k - i));
-	      //	      printf("%s\n", format);
-	      return (format);
-	    }
-	  g++;
+	  //	  printf("hi");
+	  format = ft_strsub(fmt, i + 1, (k - i));
+	  //printf("hi");
+	  //	      printf("%s\n", format);
+	  return (format);
 	}
       k++;
     }
-  return (NULL);
+  return (ft_strdup(""));
 }
 
 void gather_specs(char *fmt, t_val *ret)
@@ -65,6 +66,8 @@ void gather_specs(char *fmt, t_val *ret)
       if (fmt[index] == '%')
 	{
 	  ret->format[count] = find_next_specifiers(fmt, ret, index);
+	  /* if (!ret->format[count]) */
+	  /*   break; */
 	  index += ft_strlen(ret->format[count]);
 	  count++;
 	}
@@ -83,7 +86,8 @@ void parse_fmt(char *fmt, va_list ap, t_val *ret)
     {
       if (fmt[k] == '%' && ret->format[i] != NULL)
 	{
-	  dispatch_args(ret->format[i], ap, ret);
+	  if (ret->format[i] != NULL)
+	    dispatch_args(ret->format[i], ap, ret);
 	  k += ft_strlen(ret->format[i]);
 	  k++;
 	  i++;

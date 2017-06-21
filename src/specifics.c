@@ -4,6 +4,7 @@
 
 void initialize_return_struct(t_val *ret)
 {
+  ret->no_spec = 1;
   ret->flag = 0;
   ret->prec_case = 0;
   ret->r = 0;

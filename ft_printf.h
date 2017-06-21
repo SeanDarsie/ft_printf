@@ -14,6 +14,10 @@
 # define CHECK_CHAR(x) x != 'p' || x != 'S' || x != 's' || x != 'C' || x != 'c'
 # define CHECK_INT(x) x == 'i' || x == 'd' || x == 'D'
 # define CHECK_SIGN(x) x != 'i' && x != 'd' && x != 'D'
+# define SPEC(x) x == 's' || x == 'S' || x == 'c' || x == 'C' || SPEC2(x)
+# define SPEC2(x) x == 'p' || x == 'd' || x == 'D' || x == 'i' || SPEC3(x)
+# define SPEC3(x) x == 'o' || x == 'O' || x == 'u' || x == 'U' || SPEC4(x)
+# define SPEC4(x) x == 'x' || x == 'X' || x == '%'
 
 typedef struct s_form
 {
@@ -30,6 +34,7 @@ typedef struct s_val
   int r;
   int flag;
   int prec_case;
+  int no_spec;
   char *specifiers;
   char *flags;
   char *width;
@@ -122,4 +127,5 @@ char *replace_beg(t_val *ret);
 int check_zero(t_val *ret);
 void handle_sign(t_val *ret);
 void reset_flags(t_val *ret);
+int check_no_spec(char *fmt, t_val *ret);
 #endif

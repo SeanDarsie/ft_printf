@@ -7,26 +7,13 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
   if (check_no_spec(format, ret) == 0)
     ret->mid_str = ft_strdup(format);
   decipher_flags(format, ret);
+  set_wild_flags(ret, format, ap);  
   set_the_width(ret);
   if (ret->fmt->spec == 's')
     print_s(ret, ap);
   if (ret->fmt->spec == 'D' || ret->fmt->spec == 'd' || ret->fmt->spec == 'i')
     begin_ints(ret, ap);
-  if (ret->fmt->spec == 'c' || ret->fmt->spec == 'C')
-    print_c(ret, ap);
-  if (ret->fmt->spec == 'x')
-    begin_hex_values(ret, ap);
-  if (ret->fmt->spec == 'X')
-    begin_caps_hex_values(ret, ap);
-  if (ret->fmt->spec == 'u' || ret->fmt->spec == 'U')
-    begin_unsigned_int_values(ret, ap);
-  if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O')
-    begin_unsigned_octal_values(ret, ap);
-  if (ret->fmt->spec == 'p')
-    begin_printing_pointer(ret, ap);
-  if (ret->fmt->spec == '%')
-    handle_modulo(ret);
-  reset_flags(ret);
+  continue_dispatching(ret, ap);
  }
 
 char *find_next_specifiers(char *fmt, t_val *ret, int i)
@@ -40,13 +27,9 @@ char *find_next_specifiers(char *fmt, t_val *ret, int i)
   k = i + 1;
   while (fmt[k])
     {
-      //      printf("%s\n", fmt);
       if (SPEC(fmt[k]) || fmt[k] == '\0')
 	{
-	  //	  printf("hi");
 	  format = ft_strsub(fmt, i + 1, (k - i));
-	  //printf("hi");
-	  //	      printf("%s\n", format);
 	  return (format);
 	}
       k++;
@@ -66,8 +49,6 @@ void gather_specs(char *fmt, t_val *ret)
       if (fmt[index] == '%')
 	{
 	  ret->format[count] = find_next_specifiers(fmt, ret, index);
-	  /* if (!ret->format[count]) */
-	  /*   break; */
 	  index += ft_strlen(ret->format[count]);
 	  count++;
 	}
@@ -86,11 +67,12 @@ void parse_fmt(char *fmt, va_list ap, t_val *ret)
     {
       if (fmt[k] == '%' && ret->format[i] != NULL)
 	{
+	  if (ft_strchr(ret->format[i], '*'))
+	      ret->wild_width = 1;
 	  if (ret->format[i] != NULL)
 	    dispatch_args(ret->format[i], ap, ret);
-	  k += ft_strlen(ret->format[i]);
+	  k += ft_strlen(ret->format[i++]);
 	  k++;
-	  i++;
 	}
       if (fmt[k] && k < ft_strlen(fmt) && fmt[k] != '%')
 	{

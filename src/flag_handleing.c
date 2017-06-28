@@ -52,12 +52,10 @@ void decipher_length(char *fmt, t_val *ret)
   int i;
   int k;
   int l;
-  //char *length;
 
   i = 0;
   l = 0;
   k = 0;
-  // length = (char*)malloc(35);
   while (fmt[k])
     {
       i = 0;
@@ -72,7 +70,6 @@ void decipher_length(char *fmt, t_val *ret)
 	}
       k++;
     }
-  // length[l] = '\0';
   decipher_spec(fmt, ret);
 }
 

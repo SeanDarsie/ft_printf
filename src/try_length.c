@@ -48,6 +48,11 @@ void handle_size_t(t_val *ret, va_list ap, int base)
 
 void begin_ints(t_val *ret, va_list ap)
 {
+  if (ret->wild_width == 1)
+    {
+      handle_wild_card(ret, ap);
+      return;
+    }
   if (ret->fmt->spec == 'D')
     {
       handle_long_int(ret, ap, 10);

@@ -30,6 +30,8 @@ typedef struct s_form
 
 typedef struct s_val
 {
+  int wild_prec;
+  int wild_width;
   size_t str_len;
   int r;
   int flag;
@@ -117,6 +119,8 @@ void hex_hash(t_val *ret);
 void print_final_product(t_val *ret);
 
 void handle_undefinded_behavior(t_val *ret);
+void handle_wild_card(t_val *ret, va_list ap);
+void set_wild_flags(t_val *ret, char *fmt, va_list ap);
 
 void precision(t_val *ret);
 
@@ -128,4 +132,5 @@ int check_zero(t_val *ret);
 void handle_sign(t_val *ret);
 void reset_flags(t_val *ret);
 int check_no_spec(char *fmt, t_val *ret);
+void continue_dispatching(t_val *ret, va_list ap);
 #endif

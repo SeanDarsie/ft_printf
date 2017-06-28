@@ -23,6 +23,8 @@ void reset_flags(t_val *ret)
   ret->prec_case = 0;
   ret->no_spec = 1;
   ret->fmt->spec = '\0';
+  ret->wild_prec = 0;
+  ret->wild_width = 0;
 }
 
 int check_no_spec(char *fmt, t_val *ret)
@@ -35,6 +37,8 @@ int check_no_spec(char *fmt, t_val *ret)
       if (SPEC(fmt[g++]))
 	ret->no_spec = 0;
     }
+  if (ft_strchr(fmt, '*'))
+      return (1);
   if (ret->no_spec == 1)
     return (1);
   return (0);
@@ -70,7 +74,6 @@ void print_final_product(t_val *ret)
   //  printf("(-->%s<--)\n", ret->fmt->flag);
   ret->str_len = ft_strlen(ret->mid_str);
   precision(ret);
-  // ret->str_len = ft_strlen(ret->mid_str);
   handle_hash(ret);
   if (ft_strchr(ret->fmt->flag, '-'))
     ret->final_string =

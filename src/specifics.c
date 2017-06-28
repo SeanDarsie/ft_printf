@@ -4,17 +4,19 @@
 
 void initialize_return_struct(t_val *ret)
 {
+  ret->wild_prec = 0;
+  ret->wild_width = 0;
   ret->no_spec = 1;
   ret->flag = 0;
   ret->prec_case = 0;
   ret->r = 0;
-  ret->specifiers = (char*)malloc(20);
+  ret->specifiers = (char*)malloc(21);
   ret->specifiers = "sSpdDioOuUxXcC%";
   ret->flags = (char*)malloc(5);
   ret->flags = "#O-+ ";
   ret->length = (char*)malloc(20);
   ret->length = "hljz";
-  ret->format = (char**)malloc(sizeof(char*) * 50);
+  ret->format = (char**)malloc(sizeof(char*) * 200);
   ret->fmt = (t_form*)malloc(sizeof(t_form));
   ret->fmt->length = ft_strnew(5);
   ret->fmt->flag = (char*)malloc(20);
@@ -64,4 +66,23 @@ char *make_string(char c, int len)
       i++;
     }
   return (ret);
+}
+
+void continue_dispatching(t_val *ret, va_list ap)
+{
+  if (ret->fmt->spec == 'c' || ret->fmt->spec == 'C')
+    print_c(ret, ap);
+  if (ret->fmt->spec == 'x')
+    begin_hex_values(ret, ap);
+  if (ret->fmt->spec == 'X')
+    begin_caps_hex_values(ret, ap);
+  if (ret->fmt->spec == 'u' || ret->fmt->spec == 'U')
+    begin_unsigned_int_values(ret, ap);
+  if (ret->fmt->spec == 'o' || ret->fmt->spec == 'O')
+    begin_unsigned_octal_values(ret, ap);
+  if (ret->fmt->spec == 'p')
+    begin_printing_pointer(ret, ap);
+  if (ret->fmt->spec == '%')
+    handle_modulo(ret);
+  reset_flags(ret);  
 }

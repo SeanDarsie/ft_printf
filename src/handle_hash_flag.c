@@ -49,7 +49,12 @@ char *string_prec(t_val *ret)
   char *ret_str;
 
   i = 0;
-
+  if (ret->wild_prec == 1 && ret->fmt->precision == 0)
+    {
+      printf("%s\n", "GET LVL 7");
+      ret->mid_str[0] = '\0';
+      return (ret->mid_str);
+    }
   if (ret->fmt->spec == 'c' || ret->fmt->spec == 'C' ||
       ret->fmt->spec == 'p')
     return (ret->mid_str);
@@ -57,11 +62,12 @@ char *string_prec(t_val *ret)
       ret->fmt->precision <= ft_strlen(ret->mid_str))
     {
       ret_str = ft_strsub(ret->mid_str, 0 , ret->fmt->precision);
-      return (ret_str);
+            return (ret_str);
     }
-  if (ret->mid_str[0] == '\0')
-      return (make_string(' ', 0));
-  return (NULL);
+  if (ret->mid_str[0] == '\0' || (ret->wild_prec == 1 &&
+  				  ret->fmt->precision == 0))
+    return (make_string(' ', 0));
+  return (ret->mid_str);
 }
 
 void precision(t_val *ret)
@@ -77,13 +83,13 @@ void precision(t_val *ret)
       handle_sign(ret);
       return;
     }
-  if (ret->fmt->precision == 0)
-    return;
-   if (CHECK_SPEC(ret->fmt->spec))
+  if (CHECK_SPEC(ret->fmt->spec))
     {
       ret->mid_str = string_prec(ret);
       return;
-    }
+      }
+  if (ret->fmt->precision == 0)
+    return;
   prec = make_string('0', ret->fmt->precision);
   ret->mid_str = right_justify(ret->mid_str, prec);
   free(prec);

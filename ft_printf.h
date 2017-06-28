@@ -39,7 +39,7 @@ typedef struct s_val
   int no_spec;
   char *specifiers;
   char *flags;
-  char *width;
+  int  width;
   char *precision;
   char *length;
   char **format;
@@ -133,4 +133,6 @@ void handle_sign(t_val *ret);
 void reset_flags(t_val *ret);
 int check_no_spec(char *fmt, t_val *ret);
 void continue_dispatching(t_val *ret, va_list ap);
+
+void star_width(t_val *ret, va_list ap, char *fmt);
 #endif

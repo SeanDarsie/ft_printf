@@ -111,8 +111,6 @@ void decipher_flags(char *fmt, t_val *ret, va_list ap)
   i = 0;
   while (fmt[i])
     {
-      if (fmt[i] == '*' && fmt[i - 1] != '.')
-	ret->fmt->width = va_arg(ap, int);
       if (fmt[i] > '0' && fmt[i] <= '9')
 	break;
       if (CHECK_FLAGS(fmt[i]))
@@ -127,5 +125,6 @@ void decipher_flags(char *fmt, t_val *ret, va_list ap)
 	}
       i++;
     }
+  star_width(ret, ap, fmt);
   decipher_width(fmt, ret);
 }

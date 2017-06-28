@@ -39,3 +39,25 @@ void set_the_width(t_val *ret)
   //  printf("%zu\n%s\n", ret->fmt->width, ret->final_string);
 }
 
+void star_width(t_val *ret, va_list ap, char *fmt)
+{
+  int i;
+  int wide;
+
+  i = 0;
+  while (fmt[i])
+    {
+      if (fmt[i] == '*' && fmt[i - 1] != '.')
+	{
+	  wide = va_arg(ap, int);
+	  if (wide < 0)
+	    {
+	      if (!ft_strchr(ret->fmt->flag, '-'))
+		ret->fmt->flag = ft_strjoin("-", ret->fmt->flag);
+	      wide *= -1;
+	    }
+	  ret->fmt->width = (size_t)wide;
+	}
+      i++;
+    }
+}

@@ -53,7 +53,7 @@ typedef struct s_val
 
 int ft_printf(char *fmt, ...);
 void initialize_return_struct(t_val *ret);
-void decipher_flags(char *fmt, t_val *ret);
+void decipher_flags(char *fmt, t_val *ret, va_list ap);
 void set_the_width(t_val *ret);
 char *ft_uitoa_base(unsigned int val, int base);
 char *ft_itoa_base(int value, int base);

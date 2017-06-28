@@ -6,7 +6,7 @@ void dispatch_args(char *format, va_list ap, t_val *ret)
 {
   if (check_no_spec(format, ret) == 0)
     ret->mid_str = ft_strdup(format);
-  decipher_flags(format, ret);
+  decipher_flags(format, ret, ap);
   set_wild_flags(ret, format, ap);  
   set_the_width(ret);
   if (ret->fmt->spec == 's')

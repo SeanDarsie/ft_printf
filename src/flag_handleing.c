@@ -102,7 +102,7 @@ void decipher_width(char *fmt, t_val *ret)
   decipher_length(fmt, ret);
 }
 
-void decipher_flags(char *fmt, t_val *ret)
+void decipher_flags(char *fmt, t_val *ret, va_list ap)
 {  
   int i;
   int k;
@@ -111,6 +111,8 @@ void decipher_flags(char *fmt, t_val *ret)
   i = 0;
   while (fmt[i])
     {
+      if (fmt[i] == '*' && fmt[i - 1] != '.')
+	ret->fmt->width = va_arg(ap, int);
       if (fmt[i] > '0' && fmt[i] <= '9')
 	break;
       if (CHECK_FLAGS(fmt[i]))

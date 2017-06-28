@@ -26,7 +26,7 @@ void reset_flags(t_val *ret)
   ret->wild_prec = 0;
   ret->wild_width = 0;
   ft_bzero(ret->fmt->flag, 6);
-  ft_bzero(ret->fmt->lenfth, 3);
+  ft_bzero(ret->fmt->length, 3);
 }
 
 int check_no_spec(char *fmt, t_val *ret)

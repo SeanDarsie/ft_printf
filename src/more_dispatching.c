@@ -84,5 +84,6 @@ void handle_modulo(t_val *ret)
   else
     ret->final_string = right_justify(to_print, ret->final_string);
   ret->print_func(ret->final_string);
+  //printf("%zu\n", ft_strlen(ret->final_string));
   ret->r += ft_strlen(ret->final_string);
 }

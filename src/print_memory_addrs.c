@@ -16,7 +16,6 @@ char	*format_ptr_addr(void *addr)
 
 void reset_flags(t_val *ret)
 {
-  //ret->fmt->flag = NULL;
   ret->fmt->width = 0;
   ret->fmt->precision = 0;
   ret->flag = 0;
@@ -27,6 +26,8 @@ void reset_flags(t_val *ret)
   ret->wild_width = 0;
   ft_bzero(ret->fmt->flag, 6);
   ft_bzero(ret->fmt->length, 3);
+  ft_bzero(ret->final_string, 10);
+  ft_bzero(ret->mid_str, 10);
 }
 
 int check_no_spec(char *fmt, t_val *ret)

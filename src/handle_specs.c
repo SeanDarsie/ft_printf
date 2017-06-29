@@ -17,7 +17,9 @@ void	handle_wild_card(t_val *ret, va_list ap)
 	int		len;
 	char	*tmp;
 
-	len = va_arg(ap, int);
+	len = ret->fmt->width;
+	if (!ft_strcmp(ret->fmt->flag, "BUTTTS"))
+	    va_end(ap);
 	if (len < 0 && !ft_strchr(ret->fmt->flag, '-'))
 	{
 		tmp = ret->fmt->flag;
@@ -30,7 +32,6 @@ void	handle_wild_card(t_val *ret, va_list ap)
 	ret->fmt->width = len;
 	set_the_width(ret);
 	ret->wild_width = 0;
-	//	begin_ints(ret, ap);
 }
 
 void	set_wild_flags(t_val *ret, char *fmt, va_list ap)

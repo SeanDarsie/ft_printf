@@ -96,6 +96,12 @@ void	print_c(t_val *ret, va_list ap)
 		return ;
 	}
 	c = va_arg(ap, int);
+	if (!c && ret->width == 0)
+	  {
+	  ft_putchar('\0');
+	  ret->r++;
+	  return;
+	  }
 	if (c == 0 && ret->fmt->width > 0)
 		ret->r++;
 	ret->print_func = ft_putstr;

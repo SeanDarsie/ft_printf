@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 16:43:25 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:43:27 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 00:48:52 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ void	begin_printing_pointer(t_val *ret, va_list ap)
 	ret->print_func = ft_putstr_lower;
 	pointer = va_arg(ap, void*);
 	if (pointer == 0x0 && ret->prec_case == 0)
-	  {
-	    ret->mid_str = ft_strdup("0x0");
-	    if (ft_strchr(ret->fmt->flag, '0'))
-	      {
-		ret->mid_str = left_justify(ret->mid_str, ret->final_string);
-		ret->print_func(ret->mid_str);
-		return ;
-	      }
-	  }
+	{
+		ret->mid_str = ft_strdup("0x0");
+		if (ft_strchr(ret->fmt->flag, '0'))
+		{
+			ret->mid_str = left_justify(ret->mid_str, ret->final_string);
+			ret->print_func(ret->mid_str);
+			return ;
+		}
+	}
 	else
 		ret->mid_str = format_ptr_addr(pointer);
 	print_final_product(ret);

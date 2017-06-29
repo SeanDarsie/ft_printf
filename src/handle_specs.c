@@ -6,20 +6,18 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:41:45 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:38:19 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 00:46:56 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	handle_wild_card(t_val *ret, va_list ap)
+void	handle_wild_card(t_val *ret)
 {
 	int		len;
 	char	*tmp;
 
 	len = ret->fmt->width;
-	if (!ft_strcmp(ret->fmt->flag, "BUTTTS"))
-	    va_end(ap);
 	if (len < 0 && !ft_strchr(ret->fmt->flag, '-'))
 	{
 		tmp = ret->fmt->flag;
@@ -28,7 +26,7 @@ void	handle_wild_card(t_val *ret, va_list ap)
 		len *= -1;
 	}
 	if (len < 0)
-	  len *= -1;
+		len *= -1;
 	ret->fmt->width = len;
 	set_the_width(ret);
 	ret->wild_width = 0;
@@ -42,7 +40,7 @@ void	set_wild_flags(t_val *ret, char *fmt, va_list ap)
 	i = 0;
 	prec = 0;
 	if (ret->wild_width == 1)
-	  handle_wild_card(ret, ap);
+		handle_wild_card(ret);
 	while (fmt[i])
 	{
 		if (fmt[i] == '.' && fmt[i + 1] == '*')
@@ -97,11 +95,11 @@ void	print_c(t_val *ret, va_list ap)
 	}
 	c = va_arg(ap, int);
 	if (!c && ret->fmt->width == 0)
-	  {
-	  ft_putchar('\0');
-	  ret->r++;
-	  return;
-	  }
+	{
+		ft_putchar('\0');
+		ret->r++;
+		return ;
+	}
 	if (c == 0 && ret->fmt->width > 0)
 		ret->r++;
 	ret->print_func = ft_putstr;

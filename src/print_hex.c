@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 13:29:52 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:44:32 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 00:48:33 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	do_ll_hex(t_val *ret, va_list ap, long long int h, int base)
 		while (h > 4294967295)
 			h -= 4294967296;
 		while (h < 0)
-		  h += 4294967296;
+			h += 4294967296;
 	}
 	ret->mid_str = us_longlong_toa_base(h, base);
 	print_final_product(ret);

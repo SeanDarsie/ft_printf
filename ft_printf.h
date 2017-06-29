@@ -117,7 +117,7 @@ void			hex_hash(t_val *ret);
 void			print_final_product(t_val *ret);
 
 void			handle_undefinded_behavior(t_val *ret);
-void			handle_wild_card(t_val *ret, va_list ap);
+void			handle_wild_card(t_val *ret);
 void			set_wild_flags(t_val *ret, char *fmt, va_list ap);
 
 void			precision(t_val *ret);

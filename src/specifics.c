@@ -68,7 +68,7 @@ char	*make_string(char c, int len)
 
 	i = 0;
 	ret = ft_strnew(len);
-	if (len == 0)
+	if (len == 0 || c == '\0')
 		return (ft_strdup(""));
 	while (i < len)
 	{

@@ -6,7 +6,7 @@
 #    By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/15 00:18:52 by sdarsie           #+#    #+#              #
-#    Updated: 2017/06/20 14:41:38 by sdarsie          ###   ########.fr        #
+#    Updated: 2017/06/28 21:30:16 by sdarsie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT = ./libft/libft.a
 LIBFTINC = -L ./libft/ -lft
 INC = ft_prinft.h
 INC2 = ./libft/libft.h
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_OBJS = libft/ft_striter.o \
 			 libft/ft_putnbr_fd.o \

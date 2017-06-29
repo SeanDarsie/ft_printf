@@ -96,7 +96,7 @@ void	print_c(t_val *ret, va_list ap)
 		return ;
 	}
 	c = va_arg(ap, int);
-	if (!c && ret->width == 0)
+	if (!c && ret->fmt->width == 0)
 	  {
 	  ft_putchar('\0');
 	  ret->r++;

@@ -17,8 +17,10 @@ void	do_ll_hex(t_val *ret, va_list ap, long long int h, int base)
 	h = va_arg(ap, long long);
 	if (ret->fmt->spec == 'u' && ret->fmt->length[0] == '\0')
 	{
-		if (h > 4294967295)
+		while (h > 4294967295)
 			h -= 4294967296;
+		while (h < 0)
+		  h += 4294967296;
 	}
 	ret->mid_str = us_longlong_toa_base(h, base);
 	print_final_product(ret);

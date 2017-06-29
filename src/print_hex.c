@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 13:29:52 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/29 00:48:33 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 13:28:18 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void	do_ll_hex(t_val *ret, va_list ap, long long int h, int base)
 	h = va_arg(ap, long long);
 	if (ret->fmt->spec == 'u' && ret->fmt->length[0] == '\0')
 	{
-		while (h > 4294967295)
-			h -= 4294967296;
-		while (h < 0)
-			h += 4294967296;
+		if (ret->fmt->spec == 'U' && !ft_strchr(ret->fmt->length, 'h'))
+		{
+		}
+		else
+		{
+			while (h > 4294967295)
+				h -= 4294967296;
+			while (h < 0)
+				h += 4294967296;
+		}
 	}
 	ret->mid_str = us_longlong_toa_base(h, base);
 	print_final_product(ret);

@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:57:18 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:45:09 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 01:00:21 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	handle_unsigned_normal_int(t_val *ret, va_list ap, int base)
 	if (to_print < 0)
 	{
 		real = to_print + 4294967295 + 1;
-		printf("%u\n", real);
 	}
 	ret->mid_str = us_longlong_toa_base(to_print, base);
 	print_final_product(ret);

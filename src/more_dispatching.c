@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 16:43:25 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/29 12:49:38 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 00:48:52 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,4 @@ void	handle_modulo(t_val *ret)
 		ret->final_string = right_justify(to_print, ret->final_string);
 	ret->print_func(ret->final_string);
 	ret->r += ft_strlen(ret->final_string);
-	ret->r++;
 }

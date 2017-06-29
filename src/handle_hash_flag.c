@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:40:01 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:37:07 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 01:00:03 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*string_prec(t_val *ret)
 	i = 0;
 	if (ret->wild_prec == 1 && ret->fmt->precision == 0)
 	{
-		printf("%s\n", "GET LVL 7");
 		ret->mid_str[0] = '\0';
 		return (ret->mid_str);
 	}

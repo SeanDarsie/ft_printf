@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:54:12 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 14:54:39 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 13:29:37 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,14 @@ void	handle_intmax_t_hex(t_val *ret, va_list ap, int base)
 void	handle_unsigned_short_hex(t_val *ret, va_list ap, int base)
 {
 	unsigned short	to_print;
+	long long		h;
 
+	h = 0;
+	if (ret->fmt->spec == 'U')
+	{
+		do_ll_hex(ret, ap, h, base);
+		return ;
+	}
 	to_print = va_arg(ap, int);
 	ret->mid_str = ft_uitoa_base(to_print, base);
 	print_final_product(ret);

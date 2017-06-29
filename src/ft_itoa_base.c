@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 22:26:27 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/03/08 22:10:06 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/28 16:29:39 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int		numlen(int n, int base)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	if (n < 0)
 	{
 		i = 1;
@@ -30,13 +32,15 @@ int		numlen(int n, int base)
 
 void	write_neg(char *s, int num, int base)
 {
-	int	len = numlen(num, base);
+	int	len;
+
+	len = numlen(num, base);
 	num *= -1;
 	s[len] = '\0';
 	len--;
 	while (num >= 1)
 	{
-		s[len] = '0' + (num %  base);
+		s[len] = '0' + (num % base);
 		len--;
 		num /= base;
 	}
@@ -45,8 +49,11 @@ void	write_neg(char *s, int num, int base)
 
 void	write_big(char *s, int num, int base)
 {
-	char numbers[17] = "0123456789ABCDEF";
-	int	len = numlen(num, base);
+	char	*numbers;
+	int		len;
+
+	numbers = "0123456789ABCDEF";
+	len = numlen(num, base);
 	s[len] = '\0';
 	len--;
 	while (num)
@@ -56,9 +63,11 @@ void	write_big(char *s, int num, int base)
 		len--;
 	}
 }
-char	*edgecases(int	n)
+
+char	*edgecases(int n)
 {
-	char *num;
+	char	*num;
+
 	if (n == 0)
 	{
 		num = (char*)malloc(sizeof(char) * 2);
@@ -70,36 +79,17 @@ char	*edgecases(int	n)
 	{
 		num = (char*)malloc(sizeof(char) * 12 + 1);
 		num = "-2147483648";
-		return(num);
+		return (num);
 	}
 	return (num);
 }
 
-void number_set(char *num, int value, int base, int len)
-{
-  if (value < 0)
-    {
-      write_neg(num, value, base);
-      return ;
-    }
-  if (base > 10)
-    {
-      write_big(num, value, base);
-      return ;
-    }
-  num[len] = '\0';
-  len -= 1;
-  while(value)
-    {
-      num[len] = '0' + (value % base);
-      len--;
-      value /= base;
-    }
-}
-
 char	*ft_itoa_base(int value, int base)
 {
-	char *num;
+	char	*num;
+	int		len;
+
+	len = numlen(value, base);
 	if (value == 0 || value == -2147483648)
 	{
 		num = edgecases(value);
@@ -109,8 +99,7 @@ char	*ft_itoa_base(int value, int base)
 		return (0);
 	if (base != 10 && value < 0)
 		value *= -1;
-	int	len = numlen(value, base);
-	num = (char*)malloc(sizeof(char) * len + 1);	
-        number_set(num, value, base, len);
+	num = (char*)malloc(sizeof(char) * len + 1);
+	number_set(num, value, base, len);
 	return (num);
 }

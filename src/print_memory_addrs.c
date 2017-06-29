@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:59:23 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/29 00:53:29 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 12:49:55 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	reset_flags(t_val *ret)
 	ret->prec_case = 0;
 	ft_bzero(ret->fmt->flag, 6);
 	ft_bzero(ret->fmt->length, 3);
-//	ft_bzero(ret->mid_str, ft_strlen(ret->mid_str));
-//	ft_bzero(ret->final_string, ft_strlen(ret->final_string));
+	ft_bzero(ret->mid_str, ft_strlen(ret->mid_str));
+	ft_bzero(ret->final_string, ft_strlen(ret->final_string));
 }
 
 int		check_no_spec(char *fmt, t_val *ret)

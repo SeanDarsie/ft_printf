@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 14:59:23 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 15:00:48 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/28 22:15:23 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	reset_flags(t_val *ret)
 	ret->fmt->spec = '\0';
 	ret->wild_prec = 0;
 	ret->wild_width = 0;
-	ret->prec_case = 0
+	ret->prec_case = 0;
 	ft_bzero(ret->fmt->flag, 6);
 	ft_bzero(ret->fmt->length, 3);
 	// ft_bzero(ret->final_string, 2);

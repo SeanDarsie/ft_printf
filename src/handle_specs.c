@@ -25,10 +25,12 @@ void	handle_wild_card(t_val *ret, va_list ap)
 		free(tmp);
 		len *= -1;
 	}
+	if (len < 0)
+	  len *= -1;
 	ret->fmt->width = len;
 	set_the_width(ret);
 	ret->wild_width = 0;
-	begin_ints(ret, ap);
+	//	begin_ints(ret, ap);
 }
 
 void	set_wild_flags(t_val *ret, char *fmt, va_list ap)
@@ -38,6 +40,8 @@ void	set_wild_flags(t_val *ret, char *fmt, va_list ap)
 
 	i = 0;
 	prec = 0;
+	if (ret->wild_width == 1)
+	  handle_wild_card(ret, ap);
 	while (fmt[i])
 	{
 		if (fmt[i] == '.' && fmt[i + 1] == '*')

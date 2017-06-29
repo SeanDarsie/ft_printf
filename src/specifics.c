@@ -6,7 +6,7 @@
 /*   By: sdarsie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 15:01:25 by sdarsie           #+#    #+#             */
-/*   Updated: 2017/06/28 16:46:05 by sdarsie          ###   ########.fr       */
+/*   Updated: 2017/06/29 00:13:44 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	initialize_return_struct(t_val *ret)
 	ret->str_len = 0;
 	ret->mid_str = ft_strnew(10);
 	ret->print_func = ft_putstr;
+	ret->l_string = ft_strnew(3);
 }
 
 void	put_us_int(unsigned int n)

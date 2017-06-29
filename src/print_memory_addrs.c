@@ -39,8 +39,7 @@ void	reset_flags(t_val *ret)
 	ret->prec_case = 0;
 	ft_bzero(ret->fmt->flag, 6);
 	ft_bzero(ret->fmt->length, 3);
-	initialize_return_struct(ret);
-	//	ft_bzero(ret->mid_str, ft_strlen(ret->mid_str));
+	ft_bzero(ret->mid_str, ft_strlen(ret->mid_str));
 //	ft_bzero(ret->final_string, ft_strlen(ret->final_string));
 }
 
